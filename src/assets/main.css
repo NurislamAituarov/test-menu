@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+  color: #7c8792;
+  font-weight: 400;
+}
+
+li,
+ul {
+  list-style: none;
+}
+
+.container {
+  max-width: 1116px;
+  margin: 0 auto;
+}
