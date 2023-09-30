@@ -7,7 +7,10 @@
         </div>
 
         <div class="wrapper__notification">
-          <p class="map">Москва и область</p>
+          <p class="location">
+            <img src="/location.svg" alt="Location" />
+            Москва и область
+          </p>
           <div
             class="notification"
             @click="() => (toggleAnimation = !toggleAnimation)"
@@ -22,12 +25,15 @@
             />
           </div>
 
-          <MenuHamburger />
+          <MenuHamburger @on-active-menu="onActiveMenu" />
         </div>
       </div>
-      <TheNav />
+      <TheNav v-if="activeMenu" />
     </div>
   </header>
+  <p v-if="activeMenu" class="location-mobile">
+    <img src="/location.svg" alt="Location" /> Москва и область
+  </p>
 </template>
 
 <script setup>
@@ -35,6 +41,11 @@ import { ref } from "vue";
 import TheNav from "./TheNav.vue";
 import MenuHamburger from "./MenuHamburger.vue";
 const toggleAnimation = ref(false);
+const activeMenu = ref(false);
+
+function onActiveMenu() {
+  activeMenu.value = !activeMenu.value;
+}
 </script>
 
 <style lang="scss">
@@ -45,7 +56,7 @@ const toggleAnimation = ref(false);
 
 .header__info {
   background-color: #1f2229;
-  padding: 6px 0 8px;
+  padding: 9px 0 10px;
   position: relative;
   display: flex;
   align-items: center;
@@ -96,6 +107,11 @@ const toggleAnimation = ref(false);
     animation: toggle;
   }
 }
+.location {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
 
 @keyframes bell {
   0% {
@@ -117,17 +133,36 @@ const toggleAnimation = ref(false);
     transform: rotate(0);
   }
 }
+.location-mobile {
+  display: none;
+  animation: location-anim 0.5s both;
+}
 
 @media screen and (max-width: 768px) {
+  .header {
+    border: none;
+    flex: 1;
+  }
   .header__info {
     padding: 13px 0 14px;
   }
 
-  .map {
+  .location {
     display: none;
   }
   .wrapper__notification {
     gap: 8px;
+  }
+
+  .location-mobile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #f3f5f6;
+    min-height: 56px;
+    padding: 16px;
+    font-size: 16px;
+    line-height: 22px;
   }
 }
 </style>

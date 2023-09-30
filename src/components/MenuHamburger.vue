@@ -19,7 +19,9 @@
 
 
 <script setup>
-import { ref } from "vue";
+import { ref, defineEmits } from "vue";
+
+const emit = defineEmits(["on-active-menu"]);
 
 const refMenu = ref();
 const activeMenu = ref(false);
@@ -28,6 +30,7 @@ function showMenu() {
   refMenu.value?.checked
     ? (activeMenu.value = true)
     : (activeMenu.value = false);
+  emit("on-active-menu");
 }
 </script>
 

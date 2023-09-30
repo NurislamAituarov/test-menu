@@ -60,9 +60,41 @@ const navList = store.state.nav;
   }
 }
 
-@media (max-width: 822px) {
+@media (max-width: 768px) {
   .nav {
-    display: none;
+    height: auto;
+    gap: 24px;
+    padding-top: 24px;
+    animation: menu-list 1s both;
+    ul {
+      display: flex;
+      flex-direction: column;
+      li {
+        width: 100%;
+        font-size: 16px;
+        line-height: 22px;
+        font-weight: 700;
+        color: #959597;
+        border-bottom: 1px solid #ededed;
+      }
+    }
+  }
+
+  @keyframes menu-list {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes location-anim {
+    from {
+      transform: translateY(100px);
+    }
+    to {
+      transform: translateY(0px);
+    }
   }
 }
 </style>
