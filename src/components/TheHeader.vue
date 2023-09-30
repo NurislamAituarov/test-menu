@@ -11,24 +11,14 @@
             <img src="/location.svg" alt="Location" />
             Москва и область
           </p>
-          <div
-            class="notification"
-            @click="() => (toggleAnimation = !toggleAnimation)"
-            :class="{ 'toggle-animation': toggleAnimation }"
-          >
-            <img class="bell" src="/Notification-Bell.svg" alt="Notification" />
-            <img
-              v-if="!toggleAnimation"
-              class="indicator"
-              src="/inbox_indicator.svg"
-              alt="Indicator"
-            />
-          </div>
-
+          <THeNotification
+            :toggleAnimation="toggleAnimation"
+            @on-active-animation="onActiveAnimation"
+          />
           <MenuHamburger @on-active-menu="onActiveMenu" />
         </div>
       </div>
-      <TheNav v-if="activeMenu" />
+      <TheNav v-if="activeMenu || width > 768" />
     </div>
   </header>
   <p v-if="activeMenu" class="location-mobile">
@@ -37,14 +27,25 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import TheNav from "./TheNav.vue";
 import MenuHamburger from "./MenuHamburger.vue";
+import THeNotification from "./THeNotification.vue";
 const toggleAnimation = ref(false);
 const activeMenu = ref(false);
+const width = ref();
+
+onMounted(() => {
+  const onResize = () => (width.value = window.innerWidth);
+  onResize();
+  window.addEventListener("resize", onResize);
+});
 
 function onActiveMenu() {
   activeMenu.value = !activeMenu.value;
+}
+function onActiveAnimation() {
+  toggleAnimation.value = !toggleAnimation.value;
 }
 </script>
 
