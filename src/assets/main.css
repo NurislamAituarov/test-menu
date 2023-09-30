@@ -5,7 +5,6 @@
 }
 
 body {
-  overflow-x: hidden;
   color: #7c8792;
   font-weight: 400;
 }
@@ -13,9 +12,16 @@ body {
 li,
 ul {
   list-style: none;
+  outline: none;
 }
 
 .container {
   max-width: 1116px;
   margin: 0 auto;
+}
+
+@media (max-width: 1136px) {
+  .container {
+    padding: 0 18px;
+  }
 }

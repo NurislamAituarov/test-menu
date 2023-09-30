@@ -7,7 +7,7 @@
         </div>
 
         <div class="wrapper__notification">
-          <p>Москва и область</p>
+          <p class="map">Москва и область</p>
           <div
             class="notification"
             @click="() => (toggleAnimation = !toggleAnimation)"
@@ -21,6 +21,8 @@
               alt="Indicator"
             />
           </div>
+
+          <MenuHamburger />
         </div>
       </div>
       <TheNav />
@@ -31,13 +33,19 @@
 <script setup>
 import { ref } from "vue";
 import TheNav from "./TheNav.vue";
+import MenuHamburger from "./MenuHamburger.vue";
 const toggleAnimation = ref(false);
 </script>
 
 <style lang="scss">
+.header {
+  border-bottom: 1px solid #d3d9df;
+  overflow-x: hidden;
+}
+
 .header__info {
   background-color: #1f2229;
-  padding: 8px 0 10px;
+  padding: 6px 0 8px;
   position: relative;
   display: flex;
   align-items: center;
@@ -70,6 +78,7 @@ const toggleAnimation = ref(false);
 
   .notification {
     position: relative;
+    height: 25px;
     animation: bell 1s 1s both infinite;
     cursor: pointer;
     .bell {
@@ -106,6 +115,19 @@ const toggleAnimation = ref(false);
   }
   100% {
     transform: rotate(0);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header__info {
+    padding: 13px 0 14px;
+  }
+
+  .map {
+    display: none;
+  }
+  .wrapper__notification {
+    gap: 8px;
   }
 }
 </style>

@@ -1,7 +1,9 @@
 <template>
   <nav class="nav">
     <ul>
-      <li v-for="list of navList" :key="list.id">{{ list.name }}</li>
+      <li tabindex="0" v-for="list of navList" :key="list.id">
+        {{ list.name }}
+      </li>
     </ul>
   </nav>
 </template>
@@ -16,7 +18,7 @@ const navList = store.state.nav;
 <style lang="scss">
 .nav {
   height: 47px;
-  padding: 15px 0;
+  padding: 17px 0;
 
   ul {
     display: flex;
@@ -41,13 +43,26 @@ const navList = store.state.nav;
         background-color: #1f2229;
         transition: 0.3s;
       }
-      &:hover {
+      &:hover,
+      &:focus {
         color: #1f2229;
         &::before {
           left: 0;
         }
       }
     }
+  }
+}
+
+@media (max-width: 822px) {
+  .nav ul {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 822px) {
+  .nav {
+    display: none;
   }
 }
 </style>
